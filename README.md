@@ -42,6 +42,12 @@ then
 $ npm install mqtt socket.io
 ```
 
+```
+npm install open
+npm install connect serve-static
+```
+
+
 ### MQTT broker/server
 A MQTT broker/server is needed to run on **localhost** on port **1883**. 
 
