@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python
 # 
 # test-messages.py - This script publish a random MQTT messages every 2 s.
 #
@@ -7,7 +7,7 @@
 #
 import random
 import time
-import mosquitto
+import paho.mqtt.client as paho
 
 timestamp = int(time.time())
 
@@ -30,7 +30,7 @@ while True:
         topic = element + '/' + area + '/' + random.choice(entrances)
         message = random.choice(states)
 
-    client = mosquitto.Mosquitto("mqtt-panel-test")
+    client = paho.Client("mqtt-panel-test")
     client.connect(broker)
     client.publish(topic, message)
     time.sleep(2)

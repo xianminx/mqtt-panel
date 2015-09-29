@@ -3,7 +3,6 @@
  * Copyright (c) 2013-2014, Fabian Affolter <fabian@affolter-engineering.ch>
  * Released under the MIT license. See LICENSE file for details.
  */
-
 var mqtt = require('mqtt');
 var socket = require('socket.io');
 //var firmata = require('firmata');
@@ -12,7 +11,8 @@ var mqttbroker = 'localhost';
 var mqttport = 1883;
 
 var io = socket.listen(3000);
-var mqttclient = mqtt.createClient(mqttport, mqttbroker);
+var mqttclient = mqtt.connect('mqtt://localhost');
+
 
 // Subscribe to topic
 io.sockets.on('connection', function (socket) {
@@ -23,12 +23,18 @@ io.sockets.on('connection', function (socket) {
 
 // Push the message to socket.io
 mqttclient.on('message', function(topic, payload) {
+    console.log('topic='+topic + ' payload='+payload)
     io.sockets.emit('mqtt',
         {'topic'  : topic,
-         'payload' : payload
+         'payload' : payload.toString()
         }
     );
 });
+
+
+// var connect = require('connect');
+// var serveStatic = require('serve-static');
+// connect().use(serveStatic(__dirname)).listen(8080);
 
 // Setup the arduino
 //var board = new firmata.Board('/dev/ttyACM0', function(err) {

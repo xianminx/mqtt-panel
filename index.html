@@ -32,13 +32,13 @@
                     var message = msg.topic.split('/');
                     var area = message[1];
                     var state = message[2];
-                    //console.log(msg.topic, msg.payload);
+                    console.log(msg.topic, msg.payload);
                     var timestamp = Math.round((new Date()).getTime() / 1000);
 
                     $('#topic').html(msg.topic);
                     $('#message').html(msg.topic + ', ' + msg.payload);
                     switch (area) {
-                        case 'front': 
+                        case 'front':
                             $('#value1').html('(Switch value: ' + msg.payload + ')');
                             if (msg.payload == 'true') {
                                 $('#label1').text('Closed');
