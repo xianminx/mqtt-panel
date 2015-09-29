@@ -32,6 +32,14 @@ mqttclient.on('message', function(topic, payload) {
 });
 
 
+var connect = require('connect');
+var serveStatic = require('serve-static');
+connect().use(serveStatic(__dirname)).listen(8080);
+console.log("open browser and go to http://localhost:8080")
+var open = require('open');
+
+open('http://localhost:8080');
+
 // var connect = require('connect');
 // var serveStatic = require('serve-static');
 // connect().use(serveStatic(__dirname)).listen(8080);
